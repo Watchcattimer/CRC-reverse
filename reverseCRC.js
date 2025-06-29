@@ -3,17 +3,18 @@ const path = require('path');
 const { generic_crc_calc } = require('./reverseCRC.js'); // adjust path if needed
 
 function runAllCRCs(input) {
-
-  alert(input)
 	
+// Inside reverseCRC.js
+fetch('crc_catalog.json')
+  .then(response => response.json())
+  .then(crcCatalog => {
+    // crcCatalog now contains the JSON object
+	alert(crcCatalog)
+    // ...your code using crcCatalog...
+  })
+  .catch(error => console.error('Error loading JSON:', error));
 	
-  // Load the CRC catalog
-  const crcCatalogPath = path.join(__dirname, 'crc_catalog.json');
-  const catalogData = fs.readFileSync(crcCatalogPath, 'utf8');
-  const crcCatalog = JSON.parse(catalogData);
-
-  const results = {};
-
+  
   // Loop through all CRC definitions in the catalog
   for (const [crcName, def] of Object.entries(crcCatalog)) {
     // Construct the parameter object for generic_crc_calc
