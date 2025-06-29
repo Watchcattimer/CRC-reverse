@@ -1,12 +1,14 @@
 function calculateCRC({
-  bitstream,   // string z. B. "123456789"
-  width,       // integer (z. B. 8, 16, 32)
-  polynomial,  // integer z. B. 0x04C11DB7
-  init,        // integer z. B. 0xFFFFFFFF
-  refin,       // boolean
-  refout,      // boolean
-  xorout       // integer z. B. 0xFFFFFFFF
+  bitstream,  
+  width,      
+  polynomial, 
+  init,       
+  refin,      
+  refout,     
+  xorout      
 }) {
+  alert(`bitstream: ${bitstream}`);
+
   // Helper to reflect bits
   function reflect(val, bits) {
     let res = 0;
@@ -20,6 +22,7 @@ function calculateCRC({
   const mask = (1 << width) - 1;
 
   let crc = init;
+
 
   for (let i = 0; i < bitstream.length; i++) {
     let byte = bitstream.charCodeAt(i);

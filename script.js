@@ -8,38 +8,31 @@ function reflectBits(data, width) {
     return reflection;
 }
 
-function crcCalc(bitstream, poly, init, xorout, refin, refout) {
-    const bits = bitstream.split('').map(b => parseInt(b));
-    let crc = init;
-    const width = poly.toString(2).length - 1;
-
-    if (refin) bits.reverse();
-
-    for (let bit of bits) {
-        const topBit = (crc >> (width - 1)) & 1;
-        crc = ((crc << 1) | bit) & ((1 << (width + 1)) - 1);
-        if (topBit) crc ^= poly;
-    }
-
-    if (refout) crc = reflectBits(crc, width);
-
-    return (crc ^ xorout) >>> 0;
-}
 
 document.getElementById('crcForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
     const inputStreamRaw = document.getElementById('bitStream').value.trim();
-	const inputStream = parseInt(inputStreamRaw, 2);
+	const bitInputStream = parseInt(inputStreamRaw, 2);
 	
     const polynomial = parseInt(document.getElementById('polynomial').value.trim(), 16);
     const init = parseInt(document.getElementById('init').value.trim(), 16);
-    const xorout = parseInt(document.getElementById('xorout').value.trim(), 16);
     const refin = document.getElementById('refin').checked;
     const refout = document.getElementById('refout').checked;
+    const xorout = parseInt(document.getElementById('xorout').value.trim(), 16);
 
+	const width = polynomial.toString(2).length - 1;
+	
     try {
-        const crc = crcCalc(inputStream, polynomial, init, xorout, refin, refout);
+		const crc = calculateCRC({
+			bitInputStream,
+			width,
+			polynomial,
+			init,
+			refin,
+			refout,
+			xorout
+		});
         document.getElementById('result').textContent = `CRC Result: 0x${crc.toString(16).toUpperCase()}`;
     } catch (err) {
         document.getElementById('result').textContent = `Error: ${err.message}`;
