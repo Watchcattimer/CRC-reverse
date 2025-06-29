@@ -21,7 +21,7 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
     const xorout = parseInt(document.getElementById('xorout').value.trim(), 16);
 
 	const width = polynomial.toString(2).length - 1;
-	
+
     try {
 		const crc = calculateCRC({
 			 input:  inputStreamRaw,

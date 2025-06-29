@@ -26,7 +26,7 @@ function calculateCRC({
     : String(input);
 
   for (let idx = 0; idx < asciiInput.length; idx++) {
-    let byte = asciiInput.charCodeAt(idx) & 0x7F; // force ASCII
+    let byte = asciiInput.charCodeAt(idx) & 0xFF;
     if (refin) byte = reflect(byte, 8);
     crc ^= (byte << (width - 8)) & mask;
     for (let bit = 0; bit < 8; bit++) {
