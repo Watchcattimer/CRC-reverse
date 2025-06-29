@@ -1,5 +1,5 @@
 function calculateCRC({
-  bitstream,  
+  input,  
   width,      
   polynomial, 
   init,       
@@ -7,8 +7,6 @@ function calculateCRC({
   refout,     
   xorout      
 }) {
-  alert(`bitstream: ${bitstream}`);
-
   // Helper to reflect bits
   function reflect(val, bits) {
     let res = 0;
@@ -22,10 +20,11 @@ function calculateCRC({
   const mask = (1 << width) - 1;
 
   let crc = init;
+  
+  const bitArray = Array.from(input.toString(2), bit => Number(bit));
 
-
-  for (let i = 0; i < bitstream.length; i++) {
-    let byte = bitstream.charCodeAt(i);
+  for (let i = 0; i < bitArray.length; i++) {
+    let byte = bitArray.charCodeAt(i);
     if (refin) {
       byte = reflect(byte, 8);
     }

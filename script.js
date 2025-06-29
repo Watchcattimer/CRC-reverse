@@ -13,7 +13,7 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
     const inputStreamRaw = document.getElementById('bitStream').value.trim();
-	const bitInputStream = parseInt(inputStreamRaw, 2);
+	const numberToCrc = parseInt(inputStreamRaw, 2);
 	
     const polynomial = parseInt(document.getElementById('polynomial').value.trim(), 16);
     const init = parseInt(document.getElementById('init').value.trim(), 16);
@@ -25,13 +25,13 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
 	
     try {
 		const crc = calculateCRC({
-			bitInputStream,
-			width,
-			polynomial,
-			init,
-			refin,
-			refout,
-			xorout
+			 input:  numberToCrc,
+			 width:      width,
+			 polynomial: polynomial,
+			 init:       init,
+			 refin:      refin,
+			 refout:     refout,
+			 xorout:     xorout
 		});
         document.getElementById('result').textContent = `CRC Result: 0x${crc.toString(16).toUpperCase()}`;
     } catch (err) {
