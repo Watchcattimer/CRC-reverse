@@ -29,12 +29,8 @@ function crcCalc(bitstream, poly, init, xorout, refin, refout) {
 document.getElementById('crcForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const inputStreamRaw = document.getElementById('inputStream').value.trim();
-	let inputStreamFormat = document.querySelector('input[name="inputStreamFormat"]:checked').value;	
-    let inputStream = inputStreamFormat === 'hex'
-            ? parseInt(inputStreamRaw, 16)
-            : parseInt(inputStreamRaw, 2);
-	document.getElementById('bitstream').value = inputStream;
+    const inputStreamRaw = document.getElementById('bitStream').value.trim();
+	const inputStream = parseInt(inputStreamRaw, 2);
 	
     const polynomial = parseInt(document.getElementById('polynomial').value.trim(), 16);
     const init = parseInt(document.getElementById('init').value.trim(), 16);
