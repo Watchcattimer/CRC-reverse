@@ -7,30 +7,30 @@ function calculateCRC({
   refout,     
   xorout      
 }) {
-  // Helper to reflect bits
+  // Reflect bits in a value
   function reflect(val, bits) {
-    let res = 0;
+    let result = 0;
     for (let i = 0; i < bits; i++) {
-      if (val & (1 << i)) res |= 1 << (bits - 1 - i);
+      if ((val >> i) & 1) {
+        result |= 1 << (bits - 1 - i);
+      }
     }
-    return res;
+    return result;
   }
 
-  const topbit = 1 << (width - 1);
+  const topBit = 1 << (width - 1);
   const mask = (1 << width) - 1;
-
   let crc = init;
-  const inputStr = input.toString();
-  
-  for (let i = 0; i < inputStr.length; i++) {
-    let byte = inputStr.charCodeAt(i);
-    if (refin) {
-      byte = reflect(byte, 8);
-    }
+  const asciiInput = typeof input === "string"
+    ? input
+    : String(input);
+
+  for (let idx = 0; idx < asciiInput.length; idx++) {
+    let byte = asciiInput.charCodeAt(idx) & 0x7F; // force ASCII
+    if (refin) byte = reflect(byte, 8);
     crc ^= (byte << (width - 8)) & mask;
-  
-    for (let j = 0; j < 8; j++) {
-      if (crc & topbit) {
+    for (let bit = 0; bit < 8; bit++) {
+      if (crc & topBit) {
         crc = ((crc << 1) ^ polynomial) & mask;
       } else {
         crc = (crc << 1) & mask;
@@ -38,9 +38,6 @@ function calculateCRC({
     }
   }
 
-  if (refout) {
-    crc = reflect(crc, width);
-  }
-
-  return (crc ^ xorout) >>> 0; // force unsigned
+  if (refout) crc = reflect(crc, width);
+  return (crc ^ xorout) >>> 0;
 }

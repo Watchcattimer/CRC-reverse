@@ -12,8 +12,7 @@ function reflectBits(data, width) {
 document.getElementById('crcForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const inputStreamRaw = document.getElementById('bitStream').value.trim();
-	const numberToCrc = parseInt(inputStreamRaw, 2);
+    const inputStreamRaw = document.getElementById('bitStream').value;
 	
     const polynomial = parseInt(document.getElementById('polynomial').value.trim(), 16);
     const init = parseInt(document.getElementById('init').value.trim(), 16);
@@ -25,7 +24,7 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
 	
     try {
 		const crc = calculateCRC({
-			 input:  numberToCrc,
+			 input:  inputStreamRaw,
 			 width:      width,
 			 polynomial: polynomial,
 			 init:       init,
