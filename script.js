@@ -74,7 +74,7 @@ function updateStreams() {
 }
 
 
-document.getElementById('crcFormReverse').addEventListener('submitReverse', function(e) {
+document.getElementById('crcFormReverse').addEventListener('submit', function(e) {
     e.preventDefault();
 	
 	document.getElementById('reverseRes').value = "test";
