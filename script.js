@@ -76,8 +76,8 @@ function updateStreams() {
 
 document.getElementById('crcFormReverse').addEventListener('submit', function(e) {
     e.preventDefault();
-	
-	document.getElementById('reverseRes').value = "test";
+	alert("test");
+	document.getElementById('reverseRes').textContent = "test";
 
 /*    const input = document.getElementById('inputStreamReverse').value.trim();
 
