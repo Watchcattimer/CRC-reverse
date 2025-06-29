@@ -20,16 +20,15 @@ function calculateCRC({
   const mask = (1 << width) - 1;
 
   let crc = init;
+  const inputStr = input.toString();
   
-  const bitArray = Array.from(input.toString(2), bit => Number(bit));
-
-  for (let i = 0; i < bitArray.length; i++) {
-    let byte = bitArray.charCodeAt(i);
+  for (let i = 0; i < inputStr.length; i++) {
+    let byte = inputStr.charCodeAt(i);
     if (refin) {
       byte = reflect(byte, 8);
     }
     crc ^= (byte << (width - 8)) & mask;
-
+  
     for (let j = 0; j < 8; j++) {
       if (crc & topbit) {
         crc = ((crc << 1) ^ polynomial) & mask;
