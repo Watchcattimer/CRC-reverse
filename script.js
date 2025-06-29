@@ -1,14 +1,3 @@
-function reflectBits(data, width) {
-    let reflection = 0;
-    for (let i = 0; i < width; i++) {
-        if (data & (1 << i)) {
-            reflection |= (1 << (width - 1 - i));
-        }
-    }
-    return reflection;
-}
-
-
 document.getElementById('crcForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -83,3 +72,32 @@ function updateStreams() {
     document.getElementById('bitStream').value = bitValue;
 
 }
+
+
+document.getElementById('crcFormReverse').addEventListener('submitReverse', function(e) {
+    e.preventDefault();
+	
+	document.getElementById('reverseRes').value = "test";
+
+/*    const input = document.getElementById('inputStreamReverse').value.trim();
+
+	alert(input)
+
+
+    // Call your CRC runner function
+    const results = runAllCRCs(input);
+
+    // Format and display results (you can change the output location/format as needed)
+    let output = '';
+    for (const [crcName, crcValue] of Object.entries(results)) {
+        output += `${crcName}: 0x${crcValue.toString(16).toUpperCase()}<br>`;
+    }
+    // You can create a div in your HTML to show this, e.g., <div id="reverseResults"></div>
+    let resultDiv = document.getElementById('reverseResults');
+    if (!resultDiv) {
+        resultDiv = document.createElement('div');
+        resultDiv.id = 'reverseResults';
+        document.getElementById('crcFormReverse').appendChild(resultDiv);
+    }
+    resultDiv.innerHTML = output;*/
+});
