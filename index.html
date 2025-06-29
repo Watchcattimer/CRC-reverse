@@ -11,13 +11,16 @@
         <h1>CRC Calculator</h1>
         <form id="crcForm">
 			<div class="form-group">
-				<div class="radio-group">
-					<label><input type="radio" name="inputType" value="binary" checked /> Binary</label>
-					<label><input type="radio" name="inputType" value="hex" /> HEX</label>
+				<label for="inputStream">ASCII Input Stream:</label>
+				<input type="text" id="inputStream" value="123456789" required />
+					<label><input type="radio" name="inputStreamFormat" value="hex" checked/> HEX</label>
+					<label><input type="radio" name="inputStreamFormat" value="binary" /> Binary</label>
 				</div>
-
-					<label for="bitstream">Bit Stream:</label>
-					<input type="text" id="bitstream" value="11010011101100" required />
+				<label for="hexStream">Hex Bitstream:</label>					
+				<input type="text" id="hexBitStream" readonly />
+				<label for="bitStream">Bit stream:</label>					
+				<input type="text" id="bitStream" readonly />
+				<div class="radio-group">
 			</div>
 
             <label for="polynomial">Polynomial (hex):</label>
