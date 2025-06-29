@@ -29,7 +29,13 @@ function crcCalc(bitstream, poly, init, xorout, refin, refout) {
 document.getElementById('crcForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const bitstream = document.getElementById('bitstream').value.trim();
+    const inputStreamRaw = document.getElementById('inputStream').value.trim();
+	let inputStreamFormat = document.querySelector('input[name="inputStreamFormat"]:checked').value;	
+    let inputStream = inputStreamFormat === 'hex'
+            ? parseInt(inputStreamRaw, 16)
+            : parseInt(inputStreamRaw, 2);
+	document.getElementById('bitstream').value = inputStream;
+	
     const polynomial = parseInt(document.getElementById('polynomial').value.trim(), 16);
     const init = parseInt(document.getElementById('init').value.trim(), 16);
     const xorout = parseInt(document.getElementById('xorout').value.trim(), 16);
@@ -37,17 +43,17 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
     const refout = document.getElementById('refout').checked;
 
     try {
-        const crc = crcCalc(bitstream, polynomial, init, xorout, refin, refout);
+        const crc = crcCalc(inputStream, polynomial, init, xorout, refin, refout);
         document.getElementById('result').textContent = `CRC Result: 0x${crc.toString(16).toUpperCase()}`;
     } catch (err) {
         document.getElementById('result').textContent = `Error: ${err.message}`;
     }
 });
 
-const inputType = document.querySelector('input[name="inputType"]:checked').value;
+const inputStreamFormat = document.querySelector('input[name="inputStreamFormat"]:checked').value;
 let bits;
 
-if (inputType === 'binary') {
+if (inputStreamFormat === 'binary') {
     bits = bitstream.split('').map(b => parseInt(b));
     if (bits.some(b => b !== 0 && b !== 1)) {
         throw new Error('Invalid binary input: only 0 and 1 allowed');
@@ -62,4 +68,30 @@ if (inputType === 'binary') {
             bits.push((nibble >> j) & 1);
         }
     }
+}
+
+function updateStreams() {
+    // Get input values
+    const inputValue = document.getElementById('inputStream').value;
+
+    // Convert input to hex (if input is ASCII/text)
+    let hexValue = '';
+    for (let i = 0; i < inputValue.length; i++) {
+        // Pad hex with leading zero if needed
+		hexValue += "0x"
+        hexValue += inputValue.charCodeAt(i).toString(16).padStart(2, '0');
+		hexValue += " ";
+    }
+
+    document.getElementById('hexBitStream').value = hexValue;
+
+    // Convert input to bit stream (8 bits per char)
+    let bitValue = '';
+    for (let i = 0; i < inputValue.length; i++) {
+        bitValue += inputValue.charCodeAt(i).toString(2).padStart(8, '0');
+    }
+
+    // Show hex in bitStream field (optional, if you want to show bitValue there)
+    document.getElementById('bitStream').value = bitValue;
+
 }
