@@ -21,19 +21,19 @@
 			</div>
 
             <label for="polynomial">Polynomial (hex):</label>
-            <input type="text" id="polynomial" required />
+            <input type="text" id="polynomial" value="0x8005" required />
 
             <label for="init">Initial Value (hex):</label>
-            <input type="text" id="init" required />
+            <input type="text" id="init" value="0x0" required />
 
             <label for="xorout">XOR Out (hex):</label>
-            <input type="text" id="xorout" required />
+            <input type="text" id="xorout" value="0x00" required />
 
             <label for="refin">Reflect Input:</label>
-            <input type="checkbox" id="refin" />
+            <input type="checkbox" id="refin" checked/>
 
             <label for="refout">Reflect Output:</label>
-            <input type="checkbox" id="refout" />
+            <input type="checkbox" id="refout" checked/>
 
             <button type="submit">Calculate CRC</button>
         </form>
