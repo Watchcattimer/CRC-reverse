@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRC Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>CRC Calculator</h1>
+        <form id="crcForm">
+			<div class="form-group">
+				<label><input type="radio" name="inputType" value="binary" checked /> Binary</label>
+				<label><input type="radio" name="inputType" value="hex" /> HEX</label>
+
+				<label for="bitstream">Bit Stream:</label>
+				<input type="text" id="bitstream" value="11010011101100" required />
+			</div>
+
+            <label for="polynomial">Polynomial (hex):</label>
+            <input type="text" id="polynomial" required />
+
+            <label for="init">Initial Value (hex):</label>
+            <input type="text" id="init" required />
+
+            <label for="xorout">XOR Out (hex):</label>
+            <input type="text" id="xorout" required />
+
+            <label for="refin">Reflect Input:</label>
+            <input type="checkbox" id="refin" />
+
+            <label for="refout">Reflect Output:</label>
+            <input type="checkbox" id="refout" />
+
+            <button type="submit">Calculate CRC</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
