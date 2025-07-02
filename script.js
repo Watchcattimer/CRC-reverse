@@ -6,8 +6,11 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
  const response = await fetch('catalog.json');
  const data = await response.json();
  
+ container = document.getElementById('reverseRes')
+ 
  data.forEach(item => {
-          const itemDiv = document.createElement('a');
+	 alert(item.name)
+          const itemDiv = document.createElement('div');
           itemDiv.innerHTML = `<h2>${item.name}</h2><p>${item.poly}</p>`;
           container.appendChild(itemDiv);
         });
