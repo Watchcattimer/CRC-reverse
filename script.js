@@ -6,7 +6,9 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 fetch('crc_catalog.json')
   .then(response => response.json()) // Parses JSON
   .then(data => {
-    alert(data);
+      document.getElementById('reverseRes').textContent = "<h1>aaaaaaaa<h1>";
+      document.getElementById('reverseRes1').textContent = data;
+      document.getElementById('reverseRes2').textContent = data.width;
   })
   .catch(error => {
     console.error('Error loading JSON:', error);
