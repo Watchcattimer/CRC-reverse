@@ -1,7 +1,7 @@
 document.getElementById('crcFormReverse').addEventListener('submit', function(e) {
     e.preventDefault();
-		
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
+
  fetch('crc_catalog.json')
     .then(response => {
       if (!response.ok) {
@@ -10,8 +10,19 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
       return response.json();
     })
     .then(data => {
-      // Beautify the JSON if needed
-      document.getElementById('reverseRes').textContent = JSON.stringify(data, null, 2);
+		
+/*     const params = {
+      inputStreamRaw,
+      width: data.width,
+      polynomial: data.polynomial,
+      init: data.init,
+      refin: data.refin,
+      refout: data.refout,
+      xorout: data.xorout
+    };
+    results[crcName] = generic_crc_calc(params);		*/
+		
+      document.getElementById('reverseRes').textContent = data.name;
     })
     .catch(error => {
       document.getElementById('reverseRes').textContent = 'Error: ' + error.message;
