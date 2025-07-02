@@ -2,7 +2,17 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
     e.preventDefault();
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
 
- fetch('crc_catalog.json')
+
+ const response = await fetch('catalog.json');
+ const data = await response.json();
+ 
+ data.forEach(item => {
+          const itemDiv = document.createElement('a');
+          itemDiv.innerHTML = `<h2>${item.name}</h2><p>${item.poly}</p>`;
+          container.appendChild(itemDiv);
+        });
+
+ /*fetch('crc_catalog.json')
     .then(response => {
       if (!response.ok) {
         throw new Error('Could not fetch crc_catalog.json');
@@ -11,7 +21,7 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
     })
     .then(data => {
 		
-/*     const params = {
+     const params = {
       inputStreamRaw,
       width: data.width,
       polynomial: data.polynomial,
@@ -20,7 +30,7 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
       refout: data.refout,
       xorout: data.xorout
     };
-    results[crcName] = generic_crc_calc(params);		*/
+    results[crcName] = generic_crc_calc(params);	
 
 	alert(data)
 		
@@ -30,7 +40,7 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
     })
     .catch(error => {
       document.getElementById('reverseRes').textContent = 'Error: ' + error.message;
-    });
+    });*/
 });
 
 document.getElementById('crcForm').addEventListener('submit', function (e) {
