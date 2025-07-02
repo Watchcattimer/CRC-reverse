@@ -3,7 +3,7 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
 
 
- const response = await fetch('catalog.json');
+ const response = await fetch('crc_catalog.json');
  const data = await response.json();
  
  container = document.getElementById('reverseRes')
