@@ -21,8 +21,10 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
       xorout: data.xorout
     };
     results[crcName] = generic_crc_calc(params);		*/
+
+	alert(data)
 		
-      document.getElementById('reverseRes').textContent = "aaaaaaaa";
+      document.getElementById('reverseRes').textContent = "<h1>aaaaaaaa<h1>";
       document.getElementById('reverseRes1').textContent = data;
       document.getElementById('reverseRes2').textContent = data.width;
     })
