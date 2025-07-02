@@ -22,7 +22,9 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
     };
     results[crcName] = generic_crc_calc(params);		*/
 		
-      document.getElementById('reverseRes').textContent = "aaaaaaaa" + data.name;
+      document.getElementById('reverseRes').textContent = "aaaaaaaa";
+      document.getElementById('reverseRes1').textContent = data;
+      document.getElementById('reverseRes2').textContent = data.width;
     })
     .catch(error => {
       document.getElementById('reverseRes').textContent = 'Error: ' + error.message;
