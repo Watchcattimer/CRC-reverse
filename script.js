@@ -7,7 +7,10 @@ fetch('crc_catalog.json')
   .then(response => response.json()) // Parses JSON
   .then(data => {
     alert(data);
-  }) 
+  })
+  .catch(error => {
+    console.error('Error loading JSON:', error);
+  });
 
  /*fetch('crc_catalog.json')
     .then(response => {
