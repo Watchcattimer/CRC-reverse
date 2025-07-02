@@ -3,22 +3,11 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
 
 
- const response = await fetch('crc_catalog.json');
- const data = await response.json();
- 
- document.getElementById('reverseRes').textContent = data;
- document.getElementById('reverseRes1').textContent = data.name;
- document.getElementById('reverseRes2').textContent = data.poly;
- 
- 
- container = document.getElementById('reverseRes')
- 
- data.forEach(item => {
-	 alert(item.name)
-          const itemDiv = document.createElement('div');
-          itemDiv.innerHTML = `<h2>${item.name}</h2><p>${item.poly}</p>`;
-          container.appendChild(itemDiv);
-        });
+fetch('crc_catalog.json')
+  .then(response => response.json()) // Parses JSON
+  .then(data => {
+    alert(data);
+  }) 
 
  /*fetch('crc_catalog.json')
     .then(response => {
