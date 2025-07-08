@@ -1,3 +1,16 @@
+function calculateCRC(input, def) {
+    const params = {
+      input,
+      width: def.width,
+      polynomial: def.polynomial,
+      init: def.init,
+      refin: def.refin,
+      refout: def.refout,
+      xorout: def.xorout
+    };
+	return generic_crc_calc(params);
+}
+
 document.getElementById('crcFormReverse').addEventListener('submit', function(e) {
     e.preventDefault();
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
@@ -5,9 +18,14 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 fetch('crc_catalog.json')
   .then(response => response.json()) // Parses JSON
   .then(data => {
-	  const crc_name = data.map(entry => `${entry.name}`);
+      const results = {};
+      for (const [crcName, def] of Object.entries(crcCatalog)) {
+        results[crcName] = calculateCRC(input, def); // or pass params as needed
+      }
 	  
-      document.getElementById('reverseRes').textContent = crc_name;
+      document.getElementById('reverseRes').textContent = results[0];
+      document.getElementById('reverseRes1').textContent = results["CRC-8"];
+      document.getElementById('reverseRes2').textContent = results;
   })
   .catch(error => {
     console.error('Error loading JSON:', error);
