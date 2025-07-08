@@ -1,4 +1,3 @@
-
 document.getElementById('crcFormReverse').addEventListener('submit', function(e) {
     e.preventDefault();
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
@@ -10,7 +9,7 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 	.then(data => {
 		data.forEach(item => {
 		const param = {
-				inputStreamRaw,
+				input: inputStreamRaw,
 				width: item.width,
 				polynomial: parseInt(item.poly, 16),
 				init: parseInt(item.init, 16),
@@ -20,8 +19,6 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 			};
 		const crc = calculateCRC(param);
 		result.set(item.name, crc);
-		console.log(param);
-		console.log(crc);
 		});
 
 		let matches = [];
@@ -63,8 +60,6 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
 			 xorout:     xorout
 		};
 		const crc = calculateCRC(param);
-		console.log(param);
-		console.log(crc);
 		
         document.getElementById('result').textContent = `CRC Result: 0x${crc.toString(16).toUpperCase()}`;
     } catch (err) {

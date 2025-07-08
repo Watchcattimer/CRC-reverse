@@ -7,7 +7,6 @@ function calculateCRC({
   refout,     
   xorout      
 }) {
-  console.log("aaaaaaaaaa");
   // Reflect bits in a value
   function reflect(val, bits) {
     let result = 0;
