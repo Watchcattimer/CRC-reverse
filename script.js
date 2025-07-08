@@ -15,20 +15,23 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
     e.preventDefault();
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
 
+	document.getElementById('reverseRes').textContent = "aaaaaaaaaaaa";
+
 fetch('crc_catalog.json')
-  .then(response => response.json()) // Parses JSON
+  .then(response => response.json())
   .then(data => {
-      const results = {};
-      for (const [crcName, def] of Object.entries(crcCatalog)) {
-		document.getElementById('reverseRes0').textContent = def;
-		document.getElementById('reverseRes1').textContent = crcName;
-      }
-	  
+	console.log(data);	  
+	
+	data.forEach(item => {
+		console.log('Name:', item.name);
+		console.log('Width:', item.width);
+		console.log('Poly:', item.poly);}
+	);
+	
   })
   .catch(error => {
     console.error('Error loading JSON:', error);
   });
-
  
 });
 
@@ -60,26 +63,6 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
         document.getElementById('result').textContent = `Error: ${err.message}`;
     }
 });
-
-const inputStreamFormat = document.querySelector('input[name="inputStreamFormat"]:checked').value;
-let bits;
-
-if (inputStreamFormat === 'binary') {
-    bits = bitstream.split('').map(b => parseInt(b));
-    if (bits.some(b => b !== 0 && b !== 1)) {
-        throw new Error('Invalid binary input: only 0 and 1 allowed');
-    }
-} else { // hex input
-    // Convert hex string to bits array
-    bits = [];
-    for (let i = 0; i < bitstream.length; i++) {
-        const nibble = parseInt(bitstream[i], 16);
-        if (isNaN(nibble)) throw new Error('Invalid hex input');
-        for (let j = 3; j >= 0; j--) {
-            bits.push((nibble >> j) & 1);
-        }
-    }
-}
 
 function updateStreams() {
     // Get input values
