@@ -1,17 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
-// Read the JSON file synchronously (blocking)
-const catalogPath = path.join(__dirname, 'crc_catalog.json');
-const data = fs.readFileSync(catalogPath, 'utf8');
-const crcCatalog = JSON.parse(data);
-
-// Now you can loop through the catalog
-for (const [crcName, def] of Object.entries(crcCatalog)) {
- document.getElementById('reverseRes').textContent = `${crcName}`;
- document.getElementById('reverseRes1').textContent = `${def}`;
-}
-
 document.getElementById('crcFormReverse').addEventListener('submit', function (e) {
     e.preventDefault();
 
