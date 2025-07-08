@@ -1,30 +1,43 @@
+
 document.getElementById('crcFormReverse').addEventListener('submit', function(e) {
     e.preventDefault();
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
+	const targetCrc = parseInt(document.getElementById('crcReverse').value.trim(), 16);
+    const result = new Map();
+	
+	fetch('crc_catalog.json')
+	.then(response => response.json())
+	.then(data => {
+		data.forEach(item => {
+		const param = {
+				inputStreamRaw,
+				width: item.width,
+				polynomial: parseInt(item.poly, 16),
+				init: parseInt(item.init, 16),
+				refin: item.refin,
+				refout: item.refout,
+				xorout: parseInt(item.xorout, 16)
+			};
+		const crc = calculateCRC(param);
+		result.set(item.name, crc);
+		console.log(param);
+		console.log(crc);
+		});
 
-	document.getElementById('reverseRes').textContent = "aaaaaaaaaaaa";
-
-fetch('crc_catalog.json')
-  .then(response => response.json())
-  .then(data => {
-	data.forEach(item => {
-		const params = {
-		inputStreamRaw,
-		width: item.width,
-		polynomial: item.poly,
-		init: item.init,
-		refin: item.refin,
-		refout: item.refout,
-		xorout: item.xorout
-		};
-		console.log(generic_crc_calc({params}));
+		let matches = [];
+		for (const [name, crc] of result.entries()) {
+			//console.log(name + " " +crc + " " + targetCrc);
+			if (crc == targetCrc){
+				matches.push(name);
+			}
+		}
+		document.getElementById('reverseRes').textContent = matches;
+		
+	})
+	.catch(error => {
+		console.error('Error loading JSON:', error);
 	});
 
-  })
-  .catch(error => {
-    console.error('Error loading JSON:', error);
-  });
- 
 });
 
 document.getElementById('crcForm').addEventListener('submit', function (e) {
@@ -37,8 +50,7 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
     const refin = document.getElementById('refin').checked;
     const refout = document.getElementById('refout').checked;
     const xorout = parseInt(document.getElementById('xorout').value.trim(), 16);
-
-	const width = polynomial.toString(2).length;
+	const width = parseInt(document.getElementById('width').value.trim());;
 
     try {
 		const param = {
@@ -50,8 +62,9 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
 			 refout:     refout,
 			 xorout:     xorout
 		};
-
 		const crc = calculateCRC(param);
+		console.log(param);
+		console.log(crc);
 		
         document.getElementById('result').textContent = `CRC Result: 0x${crc.toString(16).toUpperCase()}`;
     } catch (err) {
