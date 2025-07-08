@@ -1,16 +1,3 @@
-function calculateCRC(input, def) {
-    const params = {
-      input,
-      width: def.width,
-      polynomial: def.polynomial,
-      init: def.init,
-      refin: def.refin,
-      refout: def.refout,
-      xorout: def.xorout
-    };
-	return generic_crc_calc(params);
-}
-
 document.getElementById('crcFormReverse').addEventListener('submit', function(e) {
     e.preventDefault();
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
@@ -20,14 +7,19 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 fetch('crc_catalog.json')
   .then(response => response.json())
   .then(data => {
-	console.log(data);	  
-	
 	data.forEach(item => {
-		console.log('Name:', item.name);
-		console.log('Width:', item.width);
-		console.log('Poly:', item.poly);}
-	);
-	
+		const params = {
+		inputStreamRaw,
+		width: item.width,
+		polynomial: item.poly,
+		init: item.init,
+		refin: item.refin,
+		refout: item.refout,
+		xorout: item.xorout
+		};
+		console.log(generic_crc_calc({params}));
+	});
+
   })
   .catch(error => {
     console.error('Error loading JSON:', error);
@@ -49,7 +41,7 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
 	const width = polynomial.toString(2).length;
 
     try {
-		const crc = calculateCRC({
+		const param = {
 			 input:  inputStreamRaw,
 			 width:      width,
 			 polynomial: polynomial,
@@ -57,7 +49,10 @@ document.getElementById('crcForm').addEventListener('submit', function (e) {
 			 refin:      refin,
 			 refout:     refout,
 			 xorout:     xorout
-		});
+		};
+
+		const crc = calculateCRC(param);
+		
         document.getElementById('result').textContent = `CRC Result: 0x${crc.toString(16).toUpperCase()}`;
     } catch (err) {
         document.getElementById('result').textContent = `Error: ${err.message}`;
