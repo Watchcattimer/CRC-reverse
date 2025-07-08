@@ -20,12 +20,10 @@ fetch('crc_catalog.json')
   .then(data => {
       const results = {};
       for (const [crcName, def] of Object.entries(crcCatalog)) {
-        results[crcName] = calculateCRC(input, def); // or pass params as needed
+		document.getElementById('reverseRes0').textContent = def;
+		document.getElementById('reverseRes1').textContent = crcName;
       }
 	  
-      document.getElementById('reverseRes').textContent = results[0];
-      document.getElementById('reverseRes1').textContent = results["CRC-8"];
-      document.getElementById('reverseRes2').textContent = results;
   })
   .catch(error => {
     console.error('Error loading JSON:', error);
