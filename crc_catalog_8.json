@@ -1,0 +1,182 @@
+[
+  {
+    "name": "CRC-8/AUTOSAR",
+    "width": 8,
+    "poly": "0x2F",
+    "init": "0xFF",
+    "xorout": "0xFF",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/BLUETOOTH",
+    "width": 8,
+    "poly": "0xA7",
+    "init": "0x00",
+    "xorout": "0x00",
+    "refin": true,
+    "refout": true
+  },
+  {
+    "name": "CRC-8/CDMA2000",
+    "width": 8,
+    "poly": "0x9B",
+    "init": "0xFF",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/DARC",
+    "width": 8,
+    "poly": "0x39",
+    "init": "0x00",
+    "xorout": "0x00",
+    "refin": true,
+    "refout": true
+  },
+  {
+    "name": "CRC-8/DVB-S2",
+    "width": 8,
+    "poly": "0xD5",
+    "init": "0x00",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/GSM-A",
+    "width": 8,
+    "poly": "0x1D",
+    "init": "0x00",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/GSM-B",
+    "width": 8,
+    "poly": "0x49",
+    "init": "0x00",
+    "xorout": "0xFF",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/HITAG",
+    "width": 8,
+    "poly": "0x1D",
+    "init": "0xFF",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/I-432-1",
+    "width": 8,
+    "poly": "0x07",
+    "init": "0x00",
+    "xorout": "0x55",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/I-CODE",
+    "width": 8,
+    "poly": "0x1D",
+    "init": "0xFD",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/LTE",
+    "width": 8,
+    "poly": "0x9B",
+    "init": "0x00",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/MAXIM-DOW",
+    "width": 8,
+    "poly": "0x31",
+    "init": "0x00",
+    "xorout": "0x00",
+    "refin": true,
+    "refout": true
+  },
+  {
+    "name": "CRC-8/MIFARE-MAD",
+    "width": 8,
+    "poly": "0x1D",
+    "init": "0xC7",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/NRSC-5",
+    "width": 8,
+    "poly": "0x31",
+    "init": "0xFF",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/OPENSAFETY",
+    "width": 8,
+    "poly": "0x2F",
+    "init": "0x00",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/ROHC",
+    "width": 8,
+    "poly": "0x07",
+    "init": "0xFF",
+    "xorout": "0x00",
+    "refin": true,
+    "refout": true
+  },
+  {
+    "name": "CRC-8/SAE-J1850",
+    "width": 8,
+    "poly": "0x1D",
+    "init": "0xFF",
+    "xorout": "0xFF",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/SMBUS",
+    "width": 8,
+    "poly": "0x07",
+    "init": "0x00",
+    "xorout": "0x00",
+    "refin": false,
+    "refout": false
+  },
+  {
+    "name": "CRC-8/TECH-3250",
+    "width": 8,
+    "poly": "0x1D",
+    "init": "0xFF",
+    "xorout": "0x00",
+    "refin": true,
+    "refout": true
+  },
+  {
+    "name": "CRC-8/WCDMA",
+    "width": 8,
+    "poly": "0x9B",
+    "init": "0x00",
+    "xorout": "0x00",
+    "refin": true,
+    "refout": true
+  }
+]
