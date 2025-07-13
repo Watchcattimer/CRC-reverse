@@ -2,9 +2,11 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
     e.preventDefault();
 	const inputStreamRaw = document.getElementById('inputStreamReverse').value.trim();
 	const targetCrc = parseInt(document.getElementById('crcReverse').value.trim(), 16);
+	const width = document.getElementById('crcReverse').value.trim().toLowerCase().replace(/^0x/, '').length * 4;
     const result = new Map();
 	
-	fetch('crc_catalog_16.json')
+    filename = `crc_catalog_${width}.json`;
+	fetch(filename)
 	.then(response => response.json())
 	.then(data => {
 		data.forEach(item => {
