@@ -17,20 +17,23 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 				refout: item.refout,
 				xorout: parseInt(item.xorout, 16)
 			};
-			const crc = calculateCRC(param);
+			crc = calculateCRC(param);
 			result.set(item.name, crc);
 		});
 
 		let matches = [];
 		for (const [name, crc] of result.entries()) {
-			//console.log(name + " " +crc + " " + targetCrc);
 			if (crc == targetCrc){
 				matches.push(name);
 			}
 		}
-		if (matches.size != 0){
+		
+		console.log(name + " " + crc + " " + targetCrc);
+		console.log(matches.length);
+		
+		if (matches.length != 0) {
 			document.getElementById('reverseRes').textContent = matches;
-		} else{
+		} else {
 			document.getElementById('reverseRes').textContent = "no match";
 		}
 		
