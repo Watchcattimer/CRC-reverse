@@ -4,11 +4,11 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 	const targetCrc = parseInt(document.getElementById('crcReverse').value.trim(), 16);
     const result = new Map();
 	
-	fetch('crc_catalog.json')
+	fetch('crc_catalog_16.json')
 	.then(response => response.json())
 	.then(data => {
 		data.forEach(item => {
-		const param = {
+			const param = {
 				input: inputStreamRaw,
 				width: item.width,
 				polynomial: parseInt(item.poly, 16),
@@ -17,8 +17,8 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 				refout: item.refout,
 				xorout: parseInt(item.xorout, 16)
 			};
-		const crc = calculateCRC(param);
-		result.set(item.name, crc);
+			const crc = calculateCRC(param);
+			result.set(item.name, crc);
 		});
 
 		let matches = [];
@@ -28,7 +28,11 @@ document.getElementById('crcFormReverse').addEventListener('submit', function(e)
 				matches.push(name);
 			}
 		}
-		document.getElementById('reverseRes').textContent = matches;
+		if (matches.size != 0){
+			document.getElementById('reverseRes').textContent = matches;
+		} else{
+			document.getElementById('reverseRes').textContent = "no match";
+		}
 		
 	})
 	.catch(error => {
